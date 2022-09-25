@@ -1,4 +1,4 @@
-.wish{
+.addSneaker{
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
@@ -8,7 +8,7 @@
   border-top: 2px solid #333333
 }
 
-.wish > input{
+.addSneaker > input{
   padding: 10px;
   border: 2px solid #333333;
   border-radius: 5px;
@@ -16,7 +16,7 @@
   background: none
 }
 
-.wish > button{
+.addSneaker > button{
   width: max-content;
   height: max-content;
   padding: 10px 30px;
@@ -27,6 +27,6 @@
   transition-duration: 0.4s;
   background: #333333
 }
-.wish > button:hover{
+.addSneaker > button:hover{
   background: #000000
 }

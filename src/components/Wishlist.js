@@ -10,8 +10,9 @@ export default function Wishlist({ sneakers, cop }) {
   );
   const remaining = sneakers.filter(sneaker => !sneaker.copped).length;
   let caption = '';
-  let completed = remaining === 0;
-  if(remaining === 0) caption = 'All copped!';
+  let completed = remaining === 0 && sneakers.length > 0;
+  if(sneakers.length === 0) caption = 'Add some sneakers to get started';
+  else if(remaining === 0) caption = 'All copped!';
   else caption = remaining + ' sneaker' + (remaining === 1 ? '' : 's') + ' to cop';
 
   return (

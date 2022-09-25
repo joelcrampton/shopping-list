@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import './Wish.css';
+import './AddSneaker.css';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Wish({ setSneakers }) {
@@ -9,7 +9,7 @@ export default function Wish({ setSneakers }) {
   const modelRef = useRef();
   const colorwayRef = useRef();
 
-  function wish(e){
+  function add(e){
     const brand = brandRef.current.value;
     const model = modelRef.current.value;
     const colorway = colorwayRef.current.value;
@@ -25,11 +25,11 @@ export default function Wish({ setSneakers }) {
   }
 
   return (
-    <div className="wish">
+    <div className="addSneaker">
       <input ref={brandRef} type="text" placeholder="Brand"></input>
       <input ref={modelRef} type="text" placeholder="Model"></input>
       <input ref={colorwayRef} type="text" placeholder="Colorway"></input>
-      <button onClick={wish}>Add</button>
+      <button onClick={add}>Add</button>
     </div>
   );
 }

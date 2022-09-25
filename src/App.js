@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Wishlist from './components/Wishlist';
-import Wish from './components/Wish';
+import AddSneaker from './components/AddSneaker';
 
 const LOCAL_STORAGE_KEY = 'sneakers';
 
@@ -34,7 +34,7 @@ function App() {
     <div className="container">
       <h1>Sneaker Wishlist</h1>
       <Wishlist sneakers={sneakers} cop={cop} />
-      <Wish setSneakers={setSneakers} />
+      <AddSneaker setSneakers={setSneakers} />
     </div>
   );
 }
