@@ -1,0 +1,56 @@
+.item{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr repeat(2, max-content);
+  grid-gap: 10px;
+  align-items: center
+}
+.item.edit{
+  grid-template-columns: 1fr repeat(3, max-content);
+}
+.item:not(:last-of-type){
+  padding-bottom: 10px;
+  border-bottom: 1px solid #999999
+}
+
+label{
+  width: 100%;
+  display: grid;
+  grid-template-columns: max-content 22px max-content 1fr;
+  grid-gap: 5px;
+  align-items: center
+}
+
+.item > input{
+  width: calc(100% - 24px);
+  padding: 10px;
+  border: 2px solid #333333;
+}
+
+.item p:nth-of-type(1){
+  text-align: end
+}
+
+.item span{
+  width: 100%;
+  overflow: hidden
+}
+
+.item span > p{
+  width: max-content
+}
+
+.item > button{
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+}
+.item > button.edit{
+  background: #333333
+}
+.item > button.remove{
+  background: #ff3333
+}
+.item > button.save{
+  background: #00b359
+}

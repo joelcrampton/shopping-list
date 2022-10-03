@@ -1,0 +1,23 @@
+.addItem{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 10px;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 2px solid #333333
+}
+
+.addItem > input{
+  width: calc(100% - 24px);
+  padding: 10px;
+  border: 2px solid #333333;
+}
+
+.addItem > button{
+  width: max-content;
+  padding: 10px 30px;
+  color: #ffffff;
+  transition-duration: 0.4s;
+  background: #333333
+}

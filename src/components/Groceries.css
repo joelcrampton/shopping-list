@@ -1,0 +1,7 @@
+.groceries{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-row-gap: 10px;
+  overflow-y: scroll
+}

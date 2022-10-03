@@ -1,4 +1,9 @@
 body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -9,12 +14,39 @@ body {
   -moz-osx-font-smoothing: grayscale
 }
 
-h1{
+#root{
+  width: 400px;
+  max-height: calc(100% - 100px);
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  grid-gap: 20px;
+  padding: 20px;
+  box-shadow: 0 0 15px #666666;
+  background: #ffffff
+}
+
+html{
+  width: 100%;
+  height: 100%;
   margin: 0
 }
 
 input, button{
-  font-size: 1em
+  font-size: 1em;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background: none
+}
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer
+}
+h1, p{
+  margin: 0
 }
 
 code {

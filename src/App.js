@@ -1,41 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Wishlist from './components/Wishlist';
-import AddSneaker from './components/AddSneaker';
+import List from './components/List';
+import AddItem from './components/AddItem';
 
-const LOCAL_STORAGE_KEY = 'sneakers';
+const LOCAL_STORAGE_KEY = 'groceries';
 
 function App() {
   // States
-  const [sneakers, setSneakers] = useState([]);
+  const [groceries, setGroceries] = useState([]);
   // Effects
-  // Load sneakers from local storage
+  // Load groceries from local storage
   // No dependencies, so is only called once
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if(stored) setSneakers(stored); // Only set sneakers if there are some stored
+    if(stored) setGroceries(stored); // Only set groceries if there are some stored
   }, []);
 
-  // Save sneakers to local storage
+  // Save groceries to local storage
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(sneakers));
-  }, [sneakers]);
-
-  // In React, you should never modify a state variable
-  // Instead, create a copy, modify the copy, then set the new state with the copy
-  function cop(id){
-    const copped = [...sneakers];
-    const cop = copped.find(sneaker => sneaker.id === id);
-    cop.copped = !cop.copped;
-    setSneakers(copped);
-  }
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(groceries));
+  }, [groceries]);
   
   return (
-    <div className="container">
-      <h1>Sneaker Wishlist</h1>
-      <Wishlist sneakers={sneakers} cop={cop} />
-      <AddSneaker setSneakers={setSneakers} />
-    </div>
+    <>
+      <List title="Shopping List" groceries={groceries} setGroceries={setGroceries} />
+      <AddItem groceries={groceries} setGroceries={setGroceries} />
+    </>
   );
 }
 
