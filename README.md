@@ -7,4 +7,4 @@ A basic React web app to help with shopping.
 Makes use of localStorage to store your shopping list.
 
 ## Instructions
-1. Clone repository via https: 
+1. Clone repository via https: ```git clone https://github.com/joelcrampton/shopping-list.git```
