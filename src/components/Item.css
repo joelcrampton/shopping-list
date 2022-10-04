@@ -1,5 +1,4 @@
 .item{
-  width: 100%;
   display: grid;
   grid-template-columns: 1fr repeat(2, max-content);
   grid-gap: 10px;
