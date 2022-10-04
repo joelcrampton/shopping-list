@@ -7,7 +7,7 @@ A basic React web app to help with shopping.
 Makes use of localStorage to store your shopping list
 
 ## Instructions
-Note: NodeJS and NPM must be installed first
+*__Note:__ NodeJS and NPM must be installed first*
 1. Open a new terminal
 2. Navigate to where you want to clone the repository into: ```cd path/to/repository```
 3. Clone the repository via https: ```git clone https://github.com/joelcrampton/shopping-list.git```
