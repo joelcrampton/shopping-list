@@ -21,23 +21,6 @@ export default function Item({ edit, item, purchase, remove, save }) {
     setQuantity(item.quantity);
   }, [item.quantity, item.edit]);
 
-  // Function to pass item id to purchase()
-  function purchaseHelper(){
-    purchase(item.id);
-  }
-  // Function to pass item id to remove()
-  function removeHelper(){
-    remove(item.id);
-  }
-  
-  function editHelper(){
-    edit(item.id);
-  }
-
-  function saveHelper(){
-    save(item.id, nameRef.current.value, quantity);
-  }
-
   function blurName(e){
     const trimmed = nameRef.current.value.trim();
     nameRef.current.value = trimmed; // Trim whitespace on blur
@@ -48,10 +31,10 @@ export default function Item({ edit, item, purchase, remove, save }) {
       <div className="item edit">
         <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} />
         <Quantity quantity={quantity} setQuantity={setQuantity} />
-        <button className="save" onClick={saveHelper}>
+        <button className="save" onClick={() => save(item.id, nameRef.current.value, quantity)}>
           <FontAwesomeIcon icon={faCheck} fixedWidth />
         </button>
-        <button className="remove" onClick={removeHelper}>
+        <button className="remove" onClick={() => remove(item.id)}>
           <FontAwesomeIcon icon={faXmark} fixedWidth />
         </button>
       </div>
@@ -60,7 +43,7 @@ export default function Item({ edit, item, purchase, remove, save }) {
   else{
     return (
       <div className="item">
-        <label onClick={purchaseHelper}>
+        <label onClick={() => purchase(item.id)}>
           <Checkbox checked={item.purchased}/>
           <p>{item.quantity}</p>
           <p>x</p>
@@ -68,10 +51,10 @@ export default function Item({ edit, item, purchase, remove, save }) {
             <p ref={nameRef}>{item.name}</p>
           </span>
         </label>
-        <button className="edit" onClick={editHelper}>
+        <button className="edit" onClick={() => edit(item.id)}>
           <FontAwesomeIcon icon={faPen} fixedWidth />
         </button>
-        <button className="remove" onClick={removeHelper}>
+        <button className="remove" onClick={() => remove(item.id)}>
           <FontAwesomeIcon icon={faXmark} fixedWidth />
         </button>
       </div>
