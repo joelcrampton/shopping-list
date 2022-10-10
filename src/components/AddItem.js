@@ -13,6 +13,7 @@ export default function AddItem({ groceries, setGroceries }) {
   const [quantity, setQuantity] = useState(base + difference);
 
   // Effects
+  // Update quantity
   useEffect(() => {
     setQuantity(base + difference);
   }, [difference]);

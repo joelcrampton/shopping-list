@@ -16,22 +16,26 @@ export default function Item({ edit, item, purchase, remove, save }) {
   const nameRef = useRef();
 
   // Effects
-  useEffect(() => {
-    nameRef.current.value = item.name;
-  }, [item.edit, item.name]);
-  
-  useEffect(() => {
-    setBase(item.quantity);
-  }, [item.quantity]);
-
+  // Reset difference
   useEffect(() => {
     setDifference(0);
   }, [item.edit]);
 
+  // Update input
+  useEffect(() => {
+    nameRef.current.value = item.name;
+  }, [item.edit, item.name]);
+  
+  // Update base
+  useEffect(() => {
+    setBase(item.quantity);
+  }, [item.quantity]);
+
+  // Update quantity
   useEffect(() => {
     setQuantity(base + difference);
   }, [base, difference]);
-
+  
   function blurName(){
     const formatted = formatName(nameRef.current.value);
     nameRef.current.value = formatted; // Format on blur
@@ -44,9 +48,6 @@ export default function Item({ edit, item, purchase, remove, save }) {
         <Quantity base={base} difference={difference} setDifference={setDifference} />
         <button className="save" onClick={() => save(item.id, nameRef.current.value, quantity)}>
           <FontAwesomeIcon icon={faCheck} fixedWidth />
-        </button>
-        <button className="remove" onClick={() => remove(item.id)}>
-          <FontAwesomeIcon icon={faXmark} fixedWidth />
         </button>
       </div>
     );

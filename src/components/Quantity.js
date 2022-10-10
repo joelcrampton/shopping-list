@@ -11,11 +11,13 @@ export default function Quantity({ base, difference, setDifference}) {
   const quantityRef = useRef();
 
   // Effects
-  useEffect(() => { // Update quantity every time base or difference changes
+  // Update quantity
+  useEffect(() => {
     setQuantity(base + difference);
   }, [base, difference]);
 
-  useEffect(() => { // Update input every time quantity changes
+  // Update input
+  useEffect(() => {
     quantityRef.current.value = quantity;
   }, [quantity]);
 
@@ -29,20 +31,14 @@ export default function Quantity({ base, difference, setDifference}) {
     setDifference(difference + 1);
   }
 
-  function blur(e){
+  function blurQuantity(){
     let input = quantityRef.current.value;
-    if(isNaN(input) || input === ''){
-      input = '1'; // Reset to '1' if NaN or empty
-    }
-    else if(parseInt(input) < 1){
-      input = '1'; // Reset to '1' if < 1
-    }
-    while(input.charAt(0) === '0'){ // Remove leading zeros
-      input = input.substring(1);
-    }
-    input = parseInt(input);
+    if(isNaN(input) || input === '') input = '1'; // Reset to '1' if NaN or empty
+    else if(parseInt(input) < 1) input = '1'; // Reset to '1' if < 1
+    while(input.charAt(0) === '0') input = input.substring(1); // Remove leading zeros
+    input = parseInt(input); 
     quantityRef.current.value = input; // Required to reset input when quantity (state) has not changed
-    setDifference(input - base);
+    setDifference(input - base); // Derive difference
   }
 
   return (
@@ -50,7 +46,7 @@ export default function Quantity({ base, difference, setDifference}) {
       <button onClick={decrement}>
         <FontAwesomeIcon icon={faMinus} fixedWidth />
       </button>
-      <input ref={quantityRef} type="text" maxLength={2} onBlur={blur} />
+      <input ref={quantityRef} type="text" maxLength={2} onBlur={blurQuantity} />
       <button onClick={increment}>
         <FontAwesomeIcon icon={faPlus} fixedWidth />
       </button>

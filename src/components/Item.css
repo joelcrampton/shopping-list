@@ -4,9 +4,6 @@
   grid-gap: 10px;
   align-items: center
 }
-.item.edit{
-  grid-template-columns: 1fr repeat(3, max-content);
-}
 .item:not(:last-of-type){
   padding-bottom: 10px;
   border-bottom: 1px solid #999999
