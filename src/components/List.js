@@ -1,7 +1,7 @@
 import React from 'react';
 import './List.css';
 import Groceries from './Groceries';
-import { toTitleCase } from '../utils/format';
+import { formatName } from '../utils/format';
 
 export default function List({ title, groceries, setGroceries }) {
   // In React, you should never modify a state variable
@@ -28,8 +28,7 @@ export default function List({ title, groceries, setGroceries }) {
   }
 
   function save(id, name, quantity){
-    name = name.trim();
-    name = toTitleCase(name);
+    name = formatName(name);
     if(name === '') return;
     
     // Update item in groceries

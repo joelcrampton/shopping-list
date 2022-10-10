@@ -1,19 +1,27 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './AddItem.css';
 import Quantity from './Quantity';
-import { toTitleCase } from '../utils/format';
+import { formatName } from '../utils/format';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function AddItem({ groceries, setGroceries }) {
+  // Constants
+  const base = 1;
+
   // States
-  const [quantity, setQuantity] = useState(1);
+  const [difference, setDifference] = useState(0);
+  const [quantity, setQuantity] = useState(base + difference);
+
+  // Effects
+  useEffect(() => {
+    setQuantity(base + difference);
+  }, [difference]);
   
   // Refs
   const nameRef = useRef();
 
   function add(e){
-    let name = nameRef.current.value.trim();
-    name = toTitleCase(name);
+    let name = formatName(nameRef.current.value);
     if(name === '') return;
     
     // Merge item into groceries
@@ -30,18 +38,18 @@ export default function AddItem({ groceries, setGroceries }) {
     }
 
     nameRef.current.value = null;
-    setQuantity(1);
+    setDifference(0);
   }
 
   function blurName(e){
-    const trimmed = nameRef.current.value.trim();
-    nameRef.current.value = trimmed; // Trim whitespace on blur
+    const formatted = formatName(nameRef.current.value);
+    nameRef.current.value = formatted; // Format on blur
   }
 
   return (
     <div className="addItem">
       <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} />
-      <Quantity quantity={quantity} setQuantity={setQuantity} />
+      <Quantity base={base} difference={difference} setDifference={setDifference} />
       <button onClick={add}>Add</button>
     </div>
   );

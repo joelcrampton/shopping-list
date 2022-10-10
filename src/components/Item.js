@@ -2,12 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Item.css';
 import Checkbox from './Checkbox';
 import Quantity from './Quantity';
+import { formatName } from '../utils/format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Item({ edit, item, purchase, remove, save }) {
   // States
-  const [quantity, setQuantity] = useState(item.quantity);
+  const [base, setBase] = useState(item.quantity);
+  const [difference, setDifference] = useState(0);
+  const [quantity, setQuantity] = useState(base + difference);
 
   // Refs
   const nameRef = useRef();
@@ -15,22 +18,30 @@ export default function Item({ edit, item, purchase, remove, save }) {
   // Effects
   useEffect(() => {
     nameRef.current.value = item.name;
-  }, [item.name, item.edit]);
+  }, [item.edit, item.name]);
   
   useEffect(() => {
-    setQuantity(item.quantity);
-  }, [item.quantity, item.edit]);
+    setBase(item.quantity);
+  }, [item.quantity]);
 
-  function blurName(e){
-    const trimmed = nameRef.current.value.trim();
-    nameRef.current.value = trimmed; // Trim whitespace on blur
+  useEffect(() => {
+    setDifference(0);
+  }, [item.edit]);
+
+  useEffect(() => {
+    setQuantity(base + difference);
+  }, [base, difference]);
+
+  function blurName(){
+    const formatted = formatName(nameRef.current.value);
+    nameRef.current.value = formatted; // Format on blur
   }
 
   if(item.edit){
     return (
       <div className="item edit">
         <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} />
-        <Quantity quantity={quantity} setQuantity={setQuantity} />
+        <Quantity base={base} difference={difference} setDifference={setDifference} />
         <button className="save" onClick={() => save(item.id, nameRef.current.value, quantity)}>
           <FontAwesomeIcon icon={faCheck} fixedWidth />
         </button>

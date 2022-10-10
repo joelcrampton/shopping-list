@@ -1,28 +1,35 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Quantity.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function Quantity({ quantity, setQuantity}) {
+export default function Quantity({ base, difference, setDifference}) {
+  // States
+  const [quantity, setQuantity] = useState(base + difference);
+  
   // Refs
   const quantityRef = useRef();
 
   // Effects
-  useEffect(() => {
+  useEffect(() => { // Update quantity every time base or difference changes
+    setQuantity(base + difference);
+  }, [base, difference]);
+
+  useEffect(() => { // Update input every time quantity changes
     quantityRef.current.value = quantity;
   }, [quantity]);
 
   function decrement(e){
     if(quantity === 1) return;
-    setQuantity(quantity - 1);
+    setDifference(difference - 1);
   }
 
   function increment(e){
     if(quantity === 99) return;
-    setQuantity(quantity + 1);
+    setDifference(difference + 1);
   }
 
-  function blurQuantity(e){
+  function blur(e){
     let input = quantityRef.current.value;
     if(isNaN(input) || input === ''){
       input = '1'; // Reset to '1' if NaN or empty
@@ -35,7 +42,7 @@ export default function Quantity({ quantity, setQuantity}) {
     }
     input = parseInt(input);
     quantityRef.current.value = input; // Required to reset input when quantity (state) has not changed
-    setQuantity(input);
+    setDifference(input - base);
   }
 
   return (
@@ -43,7 +50,7 @@ export default function Quantity({ quantity, setQuantity}) {
       <button onClick={decrement}>
         <FontAwesomeIcon icon={faMinus} fixedWidth />
       </button>
-      <input ref={quantityRef} type="text" maxLength={2} onBlur={blurQuantity} />
+      <input ref={quantityRef} type="text" maxLength={2} onBlur={blur} />
       <button onClick={increment}>
         <FontAwesomeIcon icon={faPlus} fixedWidth />
       </button>
