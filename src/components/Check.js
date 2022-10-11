@@ -3,17 +3,17 @@ import './Check.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-export default function Checkbox({ checked }) {
+export default function Check({ checked, item, method }) {
   if(checked){
     return (
-      <div className="checkbox checked">
+      <div className="check checked" onClick={() => method(item.id)}>
         <FontAwesomeIcon icon={faCheck} fixedWidth />
       </div>
     );
   }
   else {
     return (
-      <div className="checkbox"></div>
+      <div className="check" onClick={() => method(item.id)}></div>
     );
   }
 }

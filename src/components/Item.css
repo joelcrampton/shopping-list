@@ -7,12 +7,22 @@
   border-bottom: 1px solid #999999
 }
 
-label{
+.details{
   width: 100%;
   display: grid;
-  grid-template-columns: max-content 22px max-content 1fr;
+  grid-template-columns: max-content 1fr;
   grid-gap: 5px;
   align-items: center
+}
+
+.text{
+  width: 100%;
+  height: 30px; /* More space for double click to edit */
+  display: grid;
+  grid-template-columns: 22px max-content 1fr;
+  grid-gap: 5px;
+  align-items: center;
+  cursor: pointer
 }
 
 .item > input{

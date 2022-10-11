@@ -1,4 +1,4 @@
-.checkbox{
+.check{
   width: 26px;
   height: 26px;
   display: flex;
@@ -10,7 +10,7 @@
   background: none;
   cursor: pointer
 }
-.checkbox.checked{
+.check.checked{
   color: #ffffff;
   border-color: #00b359;
   background: #00b359

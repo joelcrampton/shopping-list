@@ -1,3 +1,7 @@
+export function formatName(name){
+  return toTitleCase(removeMultipleSpace(name.trim()));
+}
+
 export function toTitleCase(text){
   if(text === '') return text;
   const broken = text.split(' ');
@@ -11,8 +15,4 @@ export function toTitleCase(text){
 
 export function removeMultipleSpace(text){
   return text.replace( /\s\s+/g, ' ' );
-}
-
-export function formatName(name){
-  return toTitleCase(removeMultipleSpace(name.trim()));
 }

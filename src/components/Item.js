@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Item.css';
-import Checkbox from './Checkbox';
+import Check from './Check';
 import Quantity from './Quantity';
 import { formatName } from '../utils/format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -39,7 +39,7 @@ export default function Item({ edit, item, purchase, remove, save }) {
   if(item.edit){
     return (
       <div className="item edit">
-        <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} />
+        <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} autoFocus />
         <Quantity base={base} difference={difference} setDifference={setDifference} quantity={quantity} setQuantity={setQuantity} />
         <button className="save" onClick={() => save(item.id, nameRef.current.value, quantity)}>
           <FontAwesomeIcon icon={faCheck} fixedWidth />
@@ -50,14 +50,16 @@ export default function Item({ edit, item, purchase, remove, save }) {
   else{
     return (
       <div className="item">
-        <label onClick={() => purchase(item.id)}>
-          <Checkbox checked={item.purchased}/>
-          <p>{item.quantity}</p>
-          <p>x</p>
-          <span className="name">
-            <p ref={nameRef}>{item.name}</p>
-          </span>
-        </label>
+        <div className="details">
+          <Check checked={item.purchased} item={item} method={purchase}/>
+          <div className="text" onDoubleClick={() => edit(item.id)}>
+            <p>{item.quantity}</p>
+            <p>x</p>
+            <span className="name">
+              <p ref={nameRef}>{item.name}</p>
+            </span>
+          </div>
+        </div>
         <button className="edit" onClick={() => edit(item.id)}>
           <FontAwesomeIcon icon={faPen} fixedWidth />
         </button>
