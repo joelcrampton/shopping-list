@@ -1,5 +1,5 @@
 import React from 'react';
-import './Checkbox.css';
+import './Check.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 

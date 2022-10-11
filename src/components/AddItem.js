@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import './AddItem.css';
 import Quantity from './Quantity';
 import { formatName } from '../utils/format';
@@ -11,17 +11,11 @@ export default function AddItem({ groceries, setGroceries }) {
   // States
   const [difference, setDifference] = useState(0);
   const [quantity, setQuantity] = useState(base + difference);
-
-  // Effects
-  // Update quantity
-  useEffect(() => {
-    setQuantity(base + difference);
-  }, [difference]);
   
   // Refs
   const nameRef = useRef();
 
-  function add(e){
+  function add(){
     let name = formatName(nameRef.current.value);
     if(name === '') return;
     
@@ -50,7 +44,7 @@ export default function AddItem({ groceries, setGroceries }) {
   return (
     <div className="addItem">
       <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} />
-      <Quantity base={base} difference={difference} setDifference={setDifference} />
+      <Quantity base={base} difference={difference} setDifference={setDifference} quantity={quantity} setQuantity={setQuantity} />
       <button onClick={add}>Add</button>
     </div>
   );

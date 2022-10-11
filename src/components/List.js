@@ -1,6 +1,7 @@
 import React from 'react';
 import './List.css';
 import Groceries from './Groceries';
+import CheckAll from './CheckAll';
 import { formatName } from '../utils/format';
 
 export default function List({ title, groceries, setGroceries }) {
@@ -12,11 +13,22 @@ export default function List({ title, groceries, setGroceries }) {
     edit.edit = true;
     setGroceries(copy);
   }
+
+  function isAllPurchased(){
+    return groceries.find(item => item.purchased === false) === undefined;
+  }
   
   function purchase(id){
     const copy = [...groceries];
     const purchase = copy.find(item => item.id === id);
     purchase.purchased = !purchase.purchased;
+    setGroceries(copy);
+  }
+
+  function purchaseAll(){
+    const flag = !isAllPurchased();
+    const copy = [...groceries];
+    copy.forEach(item => item.purchased = flag);
     setGroceries(copy);
   }
 
@@ -67,7 +79,10 @@ export default function List({ title, groceries, setGroceries }) {
     <div className="list" style={{ gridGap: gridGap }}>
       <h1>{title}</h1>
       <Groceries edit={edit} groceries={groceries} purchase={purchase} remove={remove} save={save} />
-      <div className={"caption" + (completed ? " completed" : "")}>{caption}</div>
+      <div className="caption">
+          <CheckAll checked={isAllPurchased()} method={purchaseAll} />
+          <p className={(completed ? "completed" : "")}>{caption}</p>
+      </div>
     </div>
   );
 }

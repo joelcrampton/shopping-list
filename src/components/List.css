@@ -13,14 +13,20 @@
 }
 
 .caption{
-  width: calc(100% - 20px);
-  display: flex;
-  align-items: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-gap: 10px;
+  align-items: center
+}
+
+.caption > p{
+  flex: 1;
   padding: 10px;
   border-radius: 5px;
   background: #cccccc
 }
-.caption.completed{
+p.completed{
   color: #ffffff;
   background: #00b359
 }

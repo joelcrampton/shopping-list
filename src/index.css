@@ -15,7 +15,8 @@ body {
 }
 
 #root{
-  width: 400px;
+  width: 80%;
+  max-width: 400px;
   max-height: calc(100% - 100px);
   display: grid;
   grid-template-rows: 1fr max-content;

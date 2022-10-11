@@ -1,12 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './Quantity.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function Quantity({ base, difference, setDifference}) {
-  // States
-  const [quantity, setQuantity] = useState(base + difference);
-  
+export default function Quantity({ base, difference, setDifference, quantity, setQuantity}) {
   // Refs
   const quantityRef = useRef();
 
@@ -14,7 +11,7 @@ export default function Quantity({ base, difference, setDifference}) {
   // Update quantity
   useEffect(() => {
     setQuantity(base + difference);
-  }, [base, difference]);
+  }, [base, difference, setQuantity]);
 
   // Update input
   useEffect(() => {
@@ -35,7 +32,7 @@ export default function Quantity({ base, difference, setDifference}) {
     let input = quantityRef.current.value;
     if(isNaN(input) || input === '') input = '1'; // Reset to '1' if NaN or empty
     else if(parseInt(input) < 1) input = '1'; // Reset to '1' if < 1
-    while(input.charAt(0) === '0') input = input.substring(1); // Remove leading zeros
+    input = input.replaceAll('^0+', ''); // Remove leading zeros
     input = parseInt(input); 
     quantityRef.current.value = input; // Required to reset input when quantity (state) has not changed
     setDifference(input - base); // Derive difference

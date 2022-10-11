@@ -30,11 +30,6 @@ export default function Item({ edit, item, purchase, remove, save }) {
   useEffect(() => {
     setBase(item.quantity);
   }, [item.quantity]);
-
-  // Update quantity
-  useEffect(() => {
-    setQuantity(base + difference);
-  }, [base, difference]);
   
   function blurName(){
     const formatted = formatName(nameRef.current.value);
@@ -45,7 +40,7 @@ export default function Item({ edit, item, purchase, remove, save }) {
     return (
       <div className="item edit">
         <input ref={nameRef} type="text" placeholder="Item" onBlur={blurName} />
-        <Quantity base={base} difference={difference} setDifference={setDifference} />
+        <Quantity base={base} difference={difference} setDifference={setDifference} quantity={quantity} setQuantity={setQuantity} />
         <button className="save" onClick={() => save(item.id, nameRef.current.value, quantity)}>
           <FontAwesomeIcon icon={faCheck} fixedWidth />
         </button>
