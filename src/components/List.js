@@ -75,14 +75,19 @@ export default function List({ title, groceries, setGroceries }) {
   else if(remaining === 0) caption = 'Shopping complete!';
   else caption = remaining + ' item' + (remaining === 1 ? '' : 's') + ' left to purchase';
 
+  let footer = (
+    <div className="footer">
+        <CheckAll checked={isAllPurchased()} method={purchaseAll} />
+        <p className={"caption" + (completed ? " completed" : "")}>{caption}</p>
+    </div>
+  );
+  if(groceries.length === 0) footer = (<p className={"caption" + (completed ? " completed" : "")}>{caption}</p>);
+
   return (
     <div className="list" style={{ gridGap: gridGap }}>
       <h1>{title}</h1>
       <Groceries edit={edit} groceries={groceries} purchase={purchase} remove={remove} save={save} />
-      <div className="caption">
-          <CheckAll checked={isAllPurchased()} method={purchaseAll} />
-          <p className={(completed ? "completed" : "")}>{caption}</p>
-      </div>
+      {footer}
     </div>
   );
 }
